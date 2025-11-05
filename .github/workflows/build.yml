@@ -29,16 +29,17 @@ jobs:
             CMD_BUILD: pyinstaller workbench --onefile --name workbench 
             OUT_FILE_NAME: workbench.exe
             ASSET_MIME: application/vnd.microsoft.portable-executable
+        python-version: ["3.9", "3.10", "3.11"]
     steps:
     - uses: actions/checkout@v5
-    - name: Set up Python 3.11
+    - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v6
       with:
-        python-version: 3.11
+        python-version: ${{ matrix.python-version }}
     - name: Install dependencies
       run: |
-          python -m pip install --upgrade pip  
-          python setup.py install
+        python -m pip install --upgrade pip  
+        python setup.py install
     - name: Build for ${{matrix.TARGET}}
       run: ${{matrix.CMD_BUILD}}    
     - name: Upload Release Asset
