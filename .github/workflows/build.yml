@@ -40,6 +40,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install typing_extensions>=4.14.0 --upgrade
+        pip install typing-extensions --force-reinstall
         python setup.py install
     - name: Build for ${{matrix.TARGET}}
       run: ${{matrix.CMD_BUILD}}    
